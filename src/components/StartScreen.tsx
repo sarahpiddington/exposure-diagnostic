@@ -26,6 +26,11 @@ export function StartScreen({ onStart }: StartScreenProps) {
             A short, judgement-free reflection on how exposed your business might be across wellbeing, health and safety.
           </p>
 
+          <p className="font-body text-muted-foreground">
+            15 questions across 3 categories. Takes about 5 minutes.<br />
+            You'll get a personalised summary of where you stand.
+          </p>
+
           <div className="flex flex-wrap justify-center gap-4 py-4">
             <span className="font-caption text-sm text-muted-foreground px-4 py-2 bg-muted/30 rounded-full">
               No legal language
