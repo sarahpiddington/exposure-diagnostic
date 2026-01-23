@@ -27,7 +27,7 @@ export function StartScreen({ onStart }: StartScreenProps) {
           </p>
 
           <p className="font-body text-muted-foreground">
-            15 questions across 3 categories. Takes about 5 minutes.<br />
+            15 questions across 3 categories. This takes about 7 minutes to complete.<br />
             You'll get a personalised summary of where you stand.
           </p>
 
