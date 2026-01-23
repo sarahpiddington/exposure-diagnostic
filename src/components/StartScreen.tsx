@@ -13,8 +13,13 @@ export function StartScreen({ onStart }: StartScreenProps) {
     <div className="min-h-screen flex items-center justify-center p-6">
       <div className="calm-card max-w-xl w-full animate-fade-in">
         <div className="text-center space-y-6">
+          <img
+            src="/logo.png"
+            alt="SAWT Logo"
+            className="h-12 mx-auto mb-4"
+          />
           <h1 className="font-heading text-3xl md:text-4xl font-bold text-foreground leading-tight text-balance">
-            The Calm Exposure Snapshot
+            How Exposed Is Your Business?
           </h1>
           
           <p className="font-body text-lg text-muted-foreground leading-relaxed">

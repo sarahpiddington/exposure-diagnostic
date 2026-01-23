@@ -14,7 +14,7 @@ export function SnapshotScreen({ snapshot, onEmailCopy, onDownloadPdf }: Snapsho
         {/* Header */}
         <header className="text-center mb-12 animate-fade-in">
           <h1 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Your Calm Exposure Snapshot
+            Your Exposure Summary
           </h1>
           <p className="font-body text-lg text-muted-foreground">
             Based on what you shared, this is the operating pattern we most often see.
@@ -113,16 +113,21 @@ export function SnapshotScreen({ snapshot, onEmailCopy, onDownloadPdf }: Snapsho
         </div>
 
         {/* Footer */}
-        <footer 
-          className="text-center animate-slide-up" 
+        <footer
+          className="text-center animate-slide-up"
           style={{ animationDelay: '0.4s' }}
         >
-          <a 
-            href="#" 
+          <a
+            href="mailto:sarah@safeandwelltogether.com?subject=I'd like to talk through my results"
             className="font-caption text-sm text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4"
           >
             Talk this through with Sarah
           </a>
+          <img
+            src="/logo.png"
+            alt="SAWT Logo"
+            className="h-10 mx-auto mt-8 opacity-70"
+          />
         </footer>
       </div>
     </div>

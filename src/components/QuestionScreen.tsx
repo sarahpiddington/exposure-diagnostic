@@ -5,8 +5,9 @@ import { Question, totalQuestions } from '@/lib/questions';
 
 interface QuestionScreenProps {
   question: Question;
-  selectedAnswer: number | undefined;
+  selectedAnswer: number | number[] | undefined;
   onAnswer: (questionId: number, answerIndex: number) => void;
+  onMultiAnswer: (questionId: number, answerIndex: number) => void;
   onNext: () => void;
   onBack: () => void;
   canGoBack: boolean;
@@ -16,6 +17,7 @@ export function QuestionScreen({
   question,
   selectedAnswer,
   onAnswer,
+  onMultiAnswer,
   onNext,
   onBack,
   canGoBack,
@@ -34,9 +36,28 @@ export function QuestionScreen({
     growth: 'bg-accent/20 text-accent-foreground',
   };
 
+  const isOptionSelected = (index: number): boolean => {
+    if (question.multiSelect) {
+      return Array.isArray(selectedAnswer) && selectedAnswer.includes(index);
+    }
+    return selectedAnswer === index;
+  };
+
+  const hasAnswer = question.multiSelect
+    ? Array.isArray(selectedAnswer) && selectedAnswer.length > 0
+    : selectedAnswer !== undefined;
+
+  const handleOptionClick = (index: number) => {
+    if (question.multiSelect) {
+      onMultiAnswer(question.id, index);
+    } else {
+      onAnswer(question.id, index);
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center p-6">
-      <div 
+      <div
         className={`calm-card max-w-2xl w-full transition-all duration-500 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
         }`}
@@ -54,7 +75,7 @@ export function QuestionScreen({
 
           {/* Progress bar */}
           <div className="h-1 bg-muted rounded-full overflow-hidden">
-            <div 
+            <div
               className="h-full bg-primary transition-all duration-500 ease-out"
               style={{ width: `${(question.id / totalQuestions) * 100}%` }}
             />
@@ -66,7 +87,9 @@ export function QuestionScreen({
           </h2>
 
           <p className="font-caption text-sm text-muted-foreground">
-            Choose the option that feels closest right now.
+            {question.multiSelect
+              ? 'Select all that apply.'
+              : 'Choose the option that feels closest right now.'}
           </p>
 
           {/* Options */}
@@ -75,8 +98,8 @@ export function QuestionScreen({
               <AnswerOption
                 key={index}
                 text={option}
-                isSelected={selectedAnswer === index}
-                onClick={() => onAnswer(question.id, index)}
+                isSelected={isOptionSelected(index)}
+                onClick={() => handleOptionClick(index)}
               />
             ))}
           </div>
@@ -93,10 +116,10 @@ export function QuestionScreen({
                 </button>
               )}
             </div>
-            
+
             <Button
               onClick={onNext}
-              disabled={selectedAnswer === undefined}
+              disabled={!hasAnswer}
               size="lg"
               className="px-8"
             >
