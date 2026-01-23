@@ -66,7 +66,7 @@ export function QuestionScreen({
           {/* Progress */}
           <div className="flex items-center justify-between">
             <span className="font-caption text-sm text-muted-foreground">
-              Question {question.id} of {totalQuestions}
+              Question {question.id} of {totalQuestions} · {Math.round((question.id / totalQuestions) * 100)}% complete
             </span>
             <span className={`font-caption text-xs px-3 py-1 rounded-full ${sectionColors[question.section]}`}>
               {question.sectionLabel}
