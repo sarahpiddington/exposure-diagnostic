@@ -100,7 +100,7 @@ export function QuestionScreen({
 
           {/* Options */}
           {question.multiSelect || isMobile ? (
-            <div className="space-y-3">
+            <div className={question.multiSelect && !isMobile ? 'grid grid-cols-2 gap-3' : 'space-y-3'}>
               {question.options.map((option, index) => (
                 <AnswerOption
                   key={index}
