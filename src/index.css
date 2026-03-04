@@ -233,12 +233,6 @@
     break-inside: avoid;
   }
 
-  /* Keep each snapshot section together where possible */
-  section {
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
-
   /* Don't orphan a section heading at the bottom of a page */
   section h3 {
     page-break-after: avoid;
