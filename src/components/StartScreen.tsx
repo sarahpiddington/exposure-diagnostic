@@ -10,8 +10,8 @@ export function StartScreen({ onStart }: StartScreenProps) {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6">
-      <div className="calm-card max-w-xl w-full animate-fade-in">
+    <div className="min-h-screen flex items-center justify-center px-[10%] py-6">
+      <div className="calm-card w-full animate-fade-in">
         <div className="text-center space-y-6">
           <img
             src="/logo.png"

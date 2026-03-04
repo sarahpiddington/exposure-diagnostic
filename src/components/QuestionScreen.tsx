@@ -57,9 +57,9 @@ export function QuestionScreen({
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6">
+    <div className="min-h-screen flex items-center justify-center px-[10%] py-6">
       <div
-        className={`calm-card max-w-2xl w-full transition-all duration-500 ${
+        className={`calm-card w-full transition-all duration-500 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
         }`}
       >
