@@ -9,6 +9,8 @@ export function TransitionScreen({ onViewSnapshot }: TransitionScreenProps) {
     <div className="min-h-screen flex items-center justify-center p-6">
       <div className="max-w-md w-full text-center animate-fade-in">
         <div className="space-y-8">
+          <img src="/logo.png" alt="Safe and Well Together" className="h-8 mx-auto" />
+
           <div className="space-y-4">
             <p className="font-heading text-2xl md:text-3xl font-bold text-foreground leading-relaxed">
               Thanks for answering honestly.
@@ -23,7 +25,7 @@ export function TransitionScreen({ onViewSnapshot }: TransitionScreenProps) {
             size="lg"
             className="px-12 py-6 text-lg font-body font-medium"
           >
-            View your snapshot
+            View your diagnostic
           </Button>
         </div>
       </div>

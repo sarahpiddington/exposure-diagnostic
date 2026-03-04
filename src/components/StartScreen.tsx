@@ -47,7 +47,7 @@ export function StartScreen({ onStart }: StartScreenProps) {
             size="lg"
             className="w-full sm:w-auto px-12 py-6 text-lg font-body font-medium"
           >
-            Start the Snapshot
+            Start the Diagnostic
           </Button>
 
           <div className="pt-4">
@@ -73,7 +73,7 @@ export function StartScreen({ onStart }: StartScreenProps) {
 
         <div className="mt-12 pt-6 border-t border-border">
           <p className="font-caption text-xs text-muted-foreground text-center">
-            Your answers are private. You'll receive a copy of your snapshot.
+            Your answers are private. You'll receive a copy of your diagnostic.
           </p>
         </div>
       </div>

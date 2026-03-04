@@ -1,6 +1,24 @@
 import { Button } from '@/components/ui/button';
 import { Snapshot } from '@/lib/snapshots';
 
+function SnapshotSection({ title, items, accentClass }: { title: string; items: string[]; accentClass: string }) {
+  return (
+    <section>
+      <h3 className="font-heading text-lg font-bold text-foreground mb-4 flex items-center gap-3">
+        <span className={`w-8 h-0.5 rounded-full ${accentClass}`}></span>
+        {title}
+      </h3>
+      <ul className="space-y-3">
+        {items.map((item, index) => (
+          <li key={index} className="font-body text-foreground/80 pl-4 border-l-2 border-muted">
+            {item}
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
 interface SnapshotScreenProps {
   snapshot: Snapshot;
   onEmailCopy: () => void;
@@ -43,50 +61,9 @@ export function SnapshotScreen({ snapshot, onEmailCopy, onDownloadPdf }: Snapsho
 
           {/* Sections */}
           <div className="space-y-10">
-            {/* Working Well */}
-            <section>
-              <h3 className="font-heading text-lg font-bold text-foreground mb-4 flex items-center gap-3">
-                <span className="w-8 h-0.5 bg-secondary rounded-full"></span>
-                What's likely working well
-              </h3>
-              <ul className="space-y-3">
-                {snapshot.workingWell.map((item, index) => (
-                  <li key={index} className="font-body text-foreground/80 pl-4 border-l-2 border-muted">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </section>
-
-            {/* Quietly Risky */}
-            <section>
-              <h3 className="font-heading text-lg font-bold text-foreground mb-4 flex items-center gap-3">
-                <span className="w-8 h-0.5 bg-muted rounded-full"></span>
-                What's quietly risky
-              </h3>
-              <ul className="space-y-3">
-                {snapshot.quietlyRisky.map((item, index) => (
-                  <li key={index} className="font-body text-foreground/80 pl-4 border-l-2 border-muted">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </section>
-
-            {/* Matters as You Grow */}
-            <section>
-              <h3 className="font-heading text-lg font-bold text-foreground mb-4 flex items-center gap-3">
-                <span className="w-8 h-0.5 bg-primary/50 rounded-full"></span>
-                What will matter as you grow or change
-              </h3>
-              <ul className="space-y-3">
-                {snapshot.mattersAsYouGrow.map((item, index) => (
-                  <li key={index} className="font-body text-foreground/80 pl-4 border-l-2 border-muted">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </section>
+            <SnapshotSection title="What's likely working well" items={snapshot.workingWell} accentClass="bg-secondary" />
+            <SnapshotSection title="What's quietly risky" items={snapshot.quietlyRisky} accentClass="bg-muted" />
+            <SnapshotSection title="What will matter as you grow or change" items={snapshot.mattersAsYouGrow} accentClass="bg-primary/50" />
           </div>
         </article>
 

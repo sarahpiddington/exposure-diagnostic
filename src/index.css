@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    /* Calm Exposure Snapshot Design System */
+    /* Exposure Diagnostic Design System */
     --background: 50 60% 98%;
     --foreground: 192 51% 23%;
 
@@ -116,6 +116,68 @@
   .answer-option.selected::before {
     content: '';
     @apply absolute left-0 top-4 bottom-4 w-1 rounded-full bg-accent;
+  }
+
+  /* Slider (single-select questions) */
+  .calm-slider-wrapper {
+    @apply w-full px-2 py-4;
+  }
+
+  .calm-slider-track-row {
+    @apply relative flex items-center w-full;
+  }
+
+  .calm-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+    /* filled/unfilled gradient set via JS inline style */
+  }
+
+  /* Thumb — hidden until user interacts */
+  .calm-slider.unset::-webkit-slider-thumb { opacity: 0; }
+  .calm-slider.unset::-moz-range-thumb    { opacity: 0; }
+
+  .calm-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: hsl(var(--accent));
+    border: 2px solid hsl(var(--primary));
+    cursor: grab;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+  .calm-slider::-webkit-slider-thumb:active { transform: scale(1.15); cursor: grabbing; }
+
+  .calm-slider::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: hsl(var(--accent));
+    border: 2px solid hsl(var(--primary));
+    cursor: grab;
+  }
+
+  /* Labels row */
+  .calm-slider-labels {
+    @apply relative mt-3 w-full;
+    height: 2.5rem;
+  }
+  .calm-slider-label {
+    @apply font-caption text-xs text-center leading-tight absolute;
+    transform: translateX(-50%);
+    top: 0;
+    color: hsl(var(--muted-foreground));
+    transition: color 0.2s, font-weight 0.2s;
+  }
+  .calm-slider-label.active {
+    color: hsl(var(--primary));
+    font-weight: 600;
   }
 
   .page-transition {

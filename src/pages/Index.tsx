@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { StartScreen } from '@/components/StartScreen';
 import { QuestionScreen } from '@/components/QuestionScreen';
 import { CaptureScreen } from '@/components/CaptureScreen';
@@ -21,7 +21,6 @@ const Index = () => {
   const [currentScreen, setCurrentScreen] = useState<Screen>('start');
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number | number[]>>({});
-  const [contactData, setContactData] = useState<ContactData | null>(null);
 
   const handleStart = useCallback(() => {
     setCurrentScreen('questions');
@@ -57,48 +56,65 @@ const Index = () => {
     }
   }, [currentQuestionIndex]);
 
-  const handleCapture = useCallback(async (data: ContactData) => {
-    setContactData(data);
+  const handleCapture = useCallback((data: ContactData) => {
     const snapshotResult = determineSnapshot(answers);
 
-    // Send to GHL webhook
-    try {
-      await fetch('https://services.leadconnectorhq.com/hooks/0gut5TWKh7PrQ2DYQ6Hc/webhook-trigger/60524e6d-fe44-497c-883b-f31a6255fae4', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: data.name,
-          email: data.email,
-          business: data.business,
-          phone: data.phone,
-          snapshot_type: snapshotResult,
-          answers: answers,
-          completed_at: new Date().toISOString(),
-        }),
-      });
-    } catch (error) {
-      console.error('Failed to send to webhook:', error);
-    }
-
+    // Transition immediately — don't block UI on webhook
     setCurrentScreen('transition');
+
+    // Build human-readable answers map
+    const readableAnswers: Record<string, string | string[]> = {};
+    questions.forEach((q) => {
+      const raw = answers[q.id];
+      if (raw === undefined) return;
+      if (Array.isArray(raw)) {
+        readableAnswers[q.text] = raw.map((i) => q.options[i] ?? String(i));
+      } else {
+        readableAnswers[q.text] = q.options[raw] ?? String(raw);
+      }
+    });
+
+    // GHL-standard field names
+    const nameParts = data.name.trim().split(' ');
+    const firstName = nameParts[0] ?? '';
+    const lastName = nameParts.slice(1).join(' ');
+
+    const payload = {
+      firstName,
+      lastName,
+      email: data.email,
+      companyName: data.business,
+      phone: data.phone,
+      snapshot_type: snapshotResult,
+      answers: readableAnswers,
+      completed_at: new Date().toISOString(),
+    };
+
+    console.log('[GHL] Firing webhook with payload:', payload);
+
+    fetch('https://services.leadconnectorhq.com/hooks/0gut5TWKh7PrQ2DYQ6Hc/webhook-trigger/4e27f580-c00f-4d35-a4ee-2baa9674769d', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
+      .then(() => console.log('[GHL] Webhook sent successfully'))
+      .catch((err) => console.error('[GHL] Webhook failed:', err));
   }, [answers]);
 
   const handleViewSnapshot = useCallback(() => {
     setCurrentScreen('snapshot');
   }, []);
 
-  const handleEmailCopy = useCallback(() => {
-    toast.success('We will send your snapshot to your email shortly.');
-  }, []);
+  const handleEmailCopy = () => {
+    toast.success('We will send your diagnostic to your email shortly.');
+  };
 
-  const handleDownloadPdf = useCallback(() => {
+  const handleDownloadPdf = () => {
     toast.success('Your PDF is being prepared for download.');
-  }, []);
+  };
 
   const currentQuestion = questions[currentQuestionIndex];
-  const snapshotType = determineSnapshot(answers);
+  const snapshotType = useMemo(() => determineSnapshot(answers), [answers]);
   const snapshot = snapshots[snapshotType];
 
   return (

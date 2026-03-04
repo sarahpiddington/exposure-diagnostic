@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { AnswerOption } from '@/components/AnswerOption';
+import { SliderOption } from '@/components/SliderOption';
 import { Question, totalQuestions } from '@/lib/questions';
 
 interface QuestionScreenProps {
@@ -12,6 +13,12 @@ interface QuestionScreenProps {
   onBack: () => void;
   canGoBack: boolean;
 }
+
+const sectionColors: Record<string, string> = {
+  people: 'bg-secondary/20 text-secondary',
+  operational: 'bg-primary/10 text-primary',
+  growth: 'bg-accent/20 text-accent-foreground',
+};
 
 export function QuestionScreen({
   question,
@@ -29,12 +36,6 @@ export function QuestionScreen({
     const timer = setTimeout(() => setIsVisible(true), 50);
     return () => clearTimeout(timer);
   }, [question.id]);
-
-  const sectionColors: Record<string, string> = {
-    people: 'bg-secondary/20 text-secondary',
-    operational: 'bg-primary/10 text-primary',
-    growth: 'bg-accent/20 text-accent-foreground',
-  };
 
   const isOptionSelected = (index: number): boolean => {
     if (question.multiSelect) {
@@ -63,6 +64,9 @@ export function QuestionScreen({
         }`}
       >
         <div className="space-y-8">
+          {/* Logo */}
+          <img src="/logo.png" alt="Safe and Well Together" className="h-8 mx-auto" />
+
           {/* Progress */}
           <div className="flex items-center justify-between">
             <span className="font-caption text-sm text-muted-foreground">
@@ -93,16 +97,24 @@ export function QuestionScreen({
           </p>
 
           {/* Options */}
-          <div className="space-y-3">
-            {question.options.map((option, index) => (
-              <AnswerOption
-                key={index}
-                text={option}
-                isSelected={isOptionSelected(index)}
-                onClick={() => handleOptionClick(index)}
-              />
-            ))}
-          </div>
+          {question.multiSelect ? (
+            <div className="space-y-3">
+              {question.options.map((option, index) => (
+                <AnswerOption
+                  key={index}
+                  text={option}
+                  isSelected={isOptionSelected(index)}
+                  onClick={() => handleOptionClick(index)}
+                />
+              ))}
+            </div>
+          ) : (
+            <SliderOption
+              options={question.options.map((text) => ({ text }))}
+              selectedIndex={selectedAnswer as number | undefined}
+              onSelect={(i) => onAnswer(question.id, i)}
+            />
+          )}
 
           {/* Navigation */}
           <div className="flex items-center justify-between pt-4">
