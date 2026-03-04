@@ -79,6 +79,8 @@ const Index = () => {
     const firstName = nameParts[0] ?? '';
     const lastName = nameParts.slice(1).join(' ');
 
+    const snapshotContent = snapshots[snapshotResult];
+
     const payload = {
       firstName,
       lastName,
@@ -86,6 +88,12 @@ const Index = () => {
       companyName: data.business,
       phone: data.phone,
       snapshot_type: snapshotResult,
+      snapshot_title: snapshotContent.title,
+      snapshot_subtitle: snapshotContent.subtitle,
+      snapshot_opening: snapshotContent.openingReflection,
+      snapshot_working_well: snapshotContent.workingWell.map((s, i) => `${i + 1}. ${s}`).join('\n'),
+      snapshot_quietly_risky: snapshotContent.quietlyRisky.map((s, i) => `${i + 1}. ${s}`).join('\n'),
+      snapshot_matters: snapshotContent.mattersAsYouGrow.map((s, i) => `${i + 1}. ${s}`).join('\n'),
       answers: readableAnswers,
       completed_at: new Date().toISOString(),
     };
