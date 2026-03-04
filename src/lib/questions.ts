@@ -150,8 +150,8 @@ export const questions: Question[] = [
     options: [
       "Yes, it's already underway",
       'Yes, definitely',
-      'Possibly',
-      'Not sure',
+      "We're thinking about it",
+      "It hasn't really crossed our minds",
       'No plans to change',
     ],
   },
