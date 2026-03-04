@@ -51,13 +51,25 @@ export function SliderOption({ options, selectedIndex, onSelect }: SliderOptionP
         {options.map((opt, i) => {
           const isFirst = i === 0;
           const isLast = i === n - 1;
-          const textAlign: React.CSSProperties['textAlign'] = isFirst ? 'left' : isLast ? 'right' : 'center';
+          const halfSegment = `${100 / (2 * (n - 1))}%`;
+
+          let style: React.CSSProperties;
+          if (isFirst) {
+            style = { left: 0, transform: 'none', textAlign: 'left', maxWidth: halfSegment };
+          } else if (isLast) {
+            style = { right: 0, left: 'auto', transform: 'none', textAlign: 'right', maxWidth: halfSegment };
+          } else {
+            const p = (i / (n - 1)) * 100;
+            const thumbPx = 11; // half of 22px thumb
+            const correction = thumbPx - (2 * thumbPx * p) / 100;
+            style = { left: `calc(${p}% + ${correction.toFixed(1)}px)`, maxWidth: `${100 / (n - 1)}%` };
+          }
 
           return (
             <span
               key={i}
               className={cn('calm-slider-label', current === i && 'active')}
-              style={{ textAlign }}
+              style={style}
             >
               {opt.text}
             </span>
