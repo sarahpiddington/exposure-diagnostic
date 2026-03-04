@@ -8,6 +8,12 @@ export interface Snapshot {
   workingWell: string[];
   quietlyRisky: string[];
   mattersAsYouGrow: string[];
+  mattersTitle: string;
+  // Email-specific fields
+  emailSubject: string;
+  emailIntro: string;
+  workingWellNote: string;
+  quietlyRiskyNote: string;
 }
 
 export const snapshots: Record<SnapshotType, Snapshot> = {
@@ -15,61 +21,79 @@ export const snapshots: Record<SnapshotType, Snapshot> = {
     type: 'informal',
     title: 'Informal but Holding',
     subtitle: 'For small teams who are coping now, but relying on goodwill.',
-    openingReflection: "Based on what you've shared, your business is currently relying heavily on informal ways of working. This often feels fine day to day, especially in small teams where people care about each other and step in when needed. This isn't a judgement - it's simply where many businesses find themselves at this stage.",
+    openingReflection: "Your business is currently relying heavily on informal ways of working. In small teams where people genuinely care about each other, this often feels completely fine — and in many ways, it is.",
     workingWell: [
-      'People are committed and generally want to do the right thing',
-      'Issues are handled through conversations rather than process',
-      "There's flexibility in how work gets done",
+      'People are committed and want to do the right thing',
+      'Issues get handled through conversation rather than process',
+      "There's real flexibility in how work gets done",
     ],
     quietlyRisky: [
-      "People are under pressure but don't say so",
-      "One or two people are carrying more than others realise",
-      "There's no clear ownership when wellbeing or safety issues arise",
+      'People may be under pressure without saying so',
+      'One or two people could be carrying more than others realise',
+      'When a wellbeing or safety issue does arise, it may not be clear who owns it',
     ],
     mattersAsYouGrow: [
-      'If you grow, hire, or lose someone key, the lack of clarity around people risk and wellbeing is likely to show up first',
-      'Putting some simple structure in place now is usually much easier than trying to fix things later',
+      'If you hire, grow or lose someone key, the gaps in clarity tend to show up first',
+      'Simple structure now is almost always easier than fixing things under pressure later',
+      "Knowing where you're exposed gives you choices — and right now, you have them",
     ],
+    mattersTitle: 'What will matter as you grow or change',
+    emailSubject: 'Your exposure snapshot — how your business looks right now',
+    emailIntro: "Here's your snapshot from the diagnostic. Take a moment with it — it's worth reading slowly.",
+    workingWellNote: "These are genuine strengths. They're often what help small businesses move quickly and feel human.",
+    quietlyRiskyNote: "None of this means something is wrong. But it does mean you're relying on things staying as they are.",
   },
   stretched: {
     type: 'stretched',
     title: 'Stretched and Exposed',
     subtitle: 'For teams already feeling pressure or cracks forming.',
-    openingReflection: "Based on what you've shared, your business appears to be operating under sustained pressure, with a lot depending on individuals coping and pushing through. This is very common and often invisible until someone reaches their limit. This isn't about blame - it's about what's sustainable.",
+    openingReflection: "Your business appears to be running under sustained pressure, with a lot depending on individuals coping and pushing through. This is one of the most common patterns we see — and it's almost always invisible from the inside until someone reaches their limit.",
     workingWell: [
       'People are committed and doing their best',
-      'Work continues even when things feel stretched',
-      'Problems are dealt with as they arise',
+      'Work keeps moving even when things feel stretched',
+      'Problems get dealt with as they come up',
     ],
     quietlyRisky: [
-      'Stress and overload going unnoticed until someone is off',
-      'Inconsistent handling of people or safety issues',
-      'Important knowledge or responsibility sitting with too few people',
+      'Stress and overload can go unnoticed until someone is suddenly off',
+      'People and safety issues may be getting handled inconsistently',
+      'Knowledge and responsibility are likely sitting with too few people',
     ],
     mattersAsYouGrow: [
-      'Without clearer ways of managing workload, wellbeing and responsibility, pressure tends to increase rather than ease',
-      'Acting early gives you more options and far less disruption than waiting until something forces the issue',
+      'Without clearer ways of managing workload and wellbeing, pressure tends to increase rather than ease',
+      'Acting now gives you far more options than waiting until something forces the issue',
+      'Small, practical steps tend to make the biggest difference at this stage',
     ],
+    mattersTitle: 'What will matter as you grow or change',
+    emailSubject: 'Your exposure snapshot — what your answers are telling us',
+    emailIntro: "Here's your snapshot. It's honest, but I want you to read it knowing it describes something very common — and very fixable.",
+    workingWellNote: "That resilience is real, and it matters. But it's expensive to maintain, and it doesn't hold indefinitely.",
+    quietlyRiskyNote: "These risks don't tend to announce themselves. They build slowly, then surface all at once.",
   },
   'growth-ready': {
     type: 'growth-ready',
     title: 'Growth-Ready but Under-Prepared',
     subtitle: 'For businesses with ambition, investment or external scrutiny ahead.',
-    openingReflection: "Based on what you've shared, your business is functioning well enough now, but much of what's in place is informal and person-dependent. That's common at this stage, but it can create exposure as expectations increase. This isn't about perfection - it's about being ready for what's next.",
+    openingReflection: "Your business is functioning well, but much of what's in place is informal and person-dependent. That's completely normal at this stage of growth. The question is whether it will hold as expectations increase.",
     workingWell: [
-      'People step up when needed',
-      'Work gets done without heavy process',
-      'Trust plays a big role in how things operate',
+      'People step up when it matters',
+      'Work gets done without heavy process or overhead',
+      'Trust plays a central role in how things operate',
     ],
     quietlyRisky: [
-      'Difficulty explaining how people risk and wellbeing are managed',
-      'Inconsistent responses to issues or absence',
-      'Pressure on leaders to personally hold everything together',
+      'It can be difficult to explain clearly how people risk and wellbeing are managed, especially under scrutiny',
+      'Issues and absences may be handled inconsistently as the team grows',
+      'Leaders end up personally holding things together that should sit in the structure',
     ],
     mattersAsYouGrow: [
-      'Clients, insurers, investors and partners will expect clarity, not perfection',
-      'Putting proportionate, practical foundations in place now helps protect both your people and the business as it evolves',
+      'Clients, insurers and investors will expect clarity — not perfection, but clarity',
+      'Proportionate foundations now protect both your people and your credibility',
+      'Getting ahead of this is far easier than retrofitting it during a growth phase or due diligence process',
     ],
+    mattersTitle: 'What will matter as you grow or come under scrutiny',
+    emailSubject: "Your exposure snapshot — where you are, and what's coming",
+    emailIntro: "Here's your snapshot. It reflects where most ambitious businesses are at this stage — and it's worth paying attention to.",
+    workingWellNote: "This is what makes businesses like yours agile and fast-moving. The challenge is that it doesn't scale on its own.",
+    quietlyRiskyNote: "These aren't failings. They're signals that the business has outgrown its current setup.",
   },
 };
 

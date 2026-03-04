@@ -63,7 +63,7 @@ export function SnapshotScreen({ snapshot, onEmailCopy, onDownloadPdf }: Snapsho
           <div className="space-y-10">
             <SnapshotSection title="What's likely working well" items={snapshot.workingWell} accentClass="bg-secondary" />
             <SnapshotSection title="What's quietly risky" items={snapshot.quietlyRisky} accentClass="bg-muted" />
-            <SnapshotSection title="What will matter as you grow or change" items={snapshot.mattersAsYouGrow} accentClass="bg-primary/50" />
+            <SnapshotSection title={snapshot.mattersTitle} items={snapshot.mattersAsYouGrow} accentClass="bg-primary/50" />
           </div>
         </article>
 
