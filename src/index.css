@@ -217,7 +217,7 @@
   .calm-card {
     box-shadow: none !important;
     border: 1px solid #ddd;
-    padding: 1.5rem !important;
+    padding: 1rem !important;
   }
 
   /* Keep section headings with their content */
@@ -247,10 +247,6 @@
   /* Tighter spacing in print to reduce page-break gaps */
   .space-y-10 > * + * {
     margin-top: 1.25rem !important;
-  }
-
-  .calm-card {
-    padding: 1rem !important;
   }
 
   a { color: inherit; text-decoration: none; }

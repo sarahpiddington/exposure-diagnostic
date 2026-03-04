@@ -56,9 +56,9 @@ const Index = () => {
     }
   }, [currentQuestionIndex]);
 
-  const handleCapture = useCallback((data: ContactData) => {
-    const snapshotResult = determineSnapshot(answers);
+  const snapshotType = useMemo(() => determineSnapshot(answers), [answers]);
 
+  const handleCapture = useCallback((data: ContactData) => {
     // Transition immediately — don't block UI on webhook
     setCurrentScreen('transition');
 
@@ -79,7 +79,9 @@ const Index = () => {
     const firstName = nameParts[0] ?? '';
     const lastName = nameParts.slice(1).join(' ');
 
-    const snapshotContent = snapshots[snapshotResult];
+    const snapshotContent = snapshots[snapshotType];
+
+    const numbered = (items: string[]) => items.map((s, i) => `${i + 1}. ${s}`);
 
     const payload = {
       firstName,
@@ -87,20 +89,20 @@ const Index = () => {
       email: data.email,
       companyName: data.business,
       phone: data.phone,
-      snapshot_type: snapshotResult,
+      snapshot_type: snapshotType,
       snapshot_title: snapshotContent.title,
       snapshot_subject: snapshotContent.emailSubject,
       snapshot_email_intro: snapshotContent.emailIntro,
       snapshot_opening: snapshotContent.openingReflection,
-      snapshot_working_well: snapshotContent.workingWell.map((s, i) => `${i + 1}. ${s}`).join('\n'),
-      snapshot_working_well_html: snapshotContent.workingWell.map((s, i) => `${i + 1}. ${s}`).join('<br>'),
+      snapshot_working_well: numbered(snapshotContent.workingWell).join('\n'),
+      snapshot_working_well_html: numbered(snapshotContent.workingWell).join('<br>'),
       snapshot_working_well_note: snapshotContent.workingWellNote,
-      snapshot_quietly_risky: snapshotContent.quietlyRisky.map((s, i) => `${i + 1}. ${s}`).join('\n'),
-      snapshot_quietly_risky_html: snapshotContent.quietlyRisky.map((s, i) => `${i + 1}. ${s}`).join('<br>'),
+      snapshot_quietly_risky: numbered(snapshotContent.quietlyRisky).join('\n'),
+      snapshot_quietly_risky_html: numbered(snapshotContent.quietlyRisky).join('<br>'),
       snapshot_quietly_risky_note: snapshotContent.quietlyRiskyNote,
       snapshot_matters_title: snapshotContent.mattersTitle,
-      snapshot_matters: snapshotContent.mattersAsYouGrow.map((s, i) => `${i + 1}. ${s}`).join('\n'),
-      snapshot_matters_html: snapshotContent.mattersAsYouGrow.map((s, i) => `${i + 1}. ${s}`).join('<br>'),
+      snapshot_matters: numbered(snapshotContent.mattersAsYouGrow).join('\n'),
+      snapshot_matters_html: numbered(snapshotContent.mattersAsYouGrow).join('<br>'),
       answers: readableAnswers,
       completed_at: new Date().toISOString(),
     };
@@ -114,22 +116,21 @@ const Index = () => {
     })
       .then(() => console.log('[GHL] Webhook sent successfully'))
       .catch((err) => console.error('[GHL] Webhook failed:', err));
-  }, [answers]);
+  }, [answers, snapshotType]);
 
   const handleViewSnapshot = useCallback(() => {
     setCurrentScreen('snapshot');
   }, []);
 
-  const handleEmailCopy = () => {
+  const handleEmailCopy = useCallback(() => {
     toast.success('Your diagnostic has been sent to your email.');
-  };
+  }, []);
 
-  const handleDownloadPdf = () => {
+  const handleDownloadPdf = useCallback(() => {
     window.print();
-  };
+  }, []);
 
   const currentQuestion = questions[currentQuestionIndex];
-  const snapshotType = useMemo(() => determineSnapshot(answers), [answers]);
   const snapshot = snapshots[snapshotType];
 
   return (
