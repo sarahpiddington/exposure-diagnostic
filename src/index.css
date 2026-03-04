@@ -201,7 +201,7 @@
 .print-only { display: none; }
 
 @page {
-  margin: 0;
+  margin: 1.5cm 2cm;
 }
 
 @media print {
@@ -212,7 +212,6 @@
     background: white !important;
     color: black !important;
     font-size: 11pt;
-    padding: 1.5cm 2cm;
   }
 
   .calm-card {
