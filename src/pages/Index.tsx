@@ -114,7 +114,7 @@ const Index = () => {
   }, []);
 
   const handleEmailCopy = () => {
-    toast.success('We will send your diagnostic to your email shortly.');
+    toast.success('Your diagnostic has been sent to your email.');
   };
 
   const handleDownloadPdf = () => {
