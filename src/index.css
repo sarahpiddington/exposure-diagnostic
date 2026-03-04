@@ -200,6 +200,10 @@
 /* Hidden on screen, visible when printing */
 .print-only { display: none; }
 
+@page {
+  margin: 0;
+}
+
 @media print {
   .print-only { display: block !important; }
   .no-print { display: none !important; }
@@ -208,6 +212,7 @@
     background: white !important;
     color: black !important;
     font-size: 11pt;
+    padding: 1.5cm 2cm;
   }
 
   .calm-card {
@@ -216,8 +221,29 @@
     padding: 1.5rem !important;
   }
 
-  h1, h2, h3 { page-break-after: avoid; }
-  li, p { page-break-inside: avoid; }
+  /* Keep section headings with their content */
+  h1, h2, h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* Keep list items and paragraphs together */
+  li, p {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Keep each snapshot section together where possible */
+  section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Don't orphan a section heading at the bottom of a page */
+  section h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
 
   a { color: inherit; text-decoration: none; }
 }
