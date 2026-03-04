@@ -30,9 +30,12 @@ export function SnapshotScreen({ snapshot, onEmailCopy, onDownloadPdf }: Snapsho
     <div className="min-h-screen py-12 px-4 md:px-[10%]">
       <div className="w-full">
         {/* Print-only header */}
-        <div className="print-only mb-8 pb-4 border-b border-gray-300">
-          <p className="font-heading text-base font-bold text-foreground">The Exposure Diagnostic</p>
-          <p className="font-body text-sm text-muted-foreground">Wellbeing, Health and Safety Exposure Diagnostic</p>
+        <div className="print-only mb-8 pb-4 border-b border-gray-300 flex items-center gap-4">
+          <img src="/logo.png" alt="SAWT Logo" style={{ height: '36px', opacity: 0.85 }} />
+          <div>
+            <p className="font-heading text-base font-bold text-foreground">The Exposure Diagnostic</p>
+            <p className="font-body text-sm text-muted-foreground">Wellbeing, Health and Safety Exposure Diagnostic</p>
+          </div>
         </div>
 
         {/* Header */}
@@ -109,7 +112,7 @@ export function SnapshotScreen({ snapshot, onEmailCopy, onDownloadPdf }: Snapsho
           <img
             src="/logo.png"
             alt="SAWT Logo"
-            className="h-10 mx-auto mt-8 opacity-70"
+            className="no-print h-10 mx-auto mt-8 opacity-70"
           />
         </footer>
         {/* Print-only booking footer */}
