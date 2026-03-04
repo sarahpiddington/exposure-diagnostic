@@ -67,7 +67,7 @@ export function QuestionScreen({
       >
         <div className="space-y-8">
           {/* Logo */}
-          <img src="/logo.png" alt="Safe and Well Together" className="h-8 mx-auto" />
+          <img src="/logo.png" alt="Safe and Well Together" className="h-12 mx-auto" />
 
           {/* Progress */}
           <div className="flex items-center justify-between">
