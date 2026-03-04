@@ -166,7 +166,8 @@
   /* Labels row */
   .calm-slider-labels {
     @apply relative mt-3 w-full;
-    height: 2.5rem;
+    min-height: 2.5rem;
+    height: 5rem;
   }
   .calm-slider-label {
     @apply font-caption text-xs text-center leading-tight absolute;
