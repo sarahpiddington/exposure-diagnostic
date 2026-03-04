@@ -105,7 +105,7 @@ export function SnapshotScreen({ snapshot, onEmailCopy, onDownloadPdf }: Snapsho
         >
           <a
             href="mailto:sarah@safeandwelltogether.com?subject=I'd like to talk through my results"
-            className="no-print font-caption text-sm text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4"
+            className="no-print font-caption text-base text-foreground hover:text-primary transition-colors underline underline-offset-4"
           >
             Talk this through with Sarah
           </a>
