@@ -86,7 +86,7 @@
 
 @layer components {
   .calm-card {
-    @apply bg-card rounded-2xl p-8 md:p-12;
+    @apply bg-card rounded-2xl p-5 sm:p-8 md:p-10;
     box-shadow: var(--card-shadow);
   }
 

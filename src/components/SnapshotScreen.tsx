@@ -27,7 +27,7 @@ interface SnapshotScreenProps {
 
 export function SnapshotScreen({ snapshot, onEmailCopy, onDownloadPdf }: SnapshotScreenProps) {
   return (
-    <div className="min-h-screen py-12 px-[10%]">
+    <div className="min-h-screen py-12 px-4 md:px-[10%]">
       <div className="w-full">
         {/* Header */}
         <header className="text-center mb-12 animate-fade-in">

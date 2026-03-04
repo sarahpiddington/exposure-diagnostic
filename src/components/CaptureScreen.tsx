@@ -23,7 +23,7 @@ export function CaptureScreen({ onSubmit }: CaptureScreenProps) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-[10%] py-6">
+    <div className="min-h-screen flex items-center justify-center px-4 md:px-[10%] py-6">
       <div className="calm-card w-full animate-fade-in">
         <div className="text-center mb-8">
           <img src="/logo.png" alt="Safe and Well Together" className="h-8 mx-auto mb-6" />

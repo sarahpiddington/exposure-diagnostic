@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { AnswerOption } from '@/components/AnswerOption';
 import { SliderOption } from '@/components/SliderOption';
 import { Question, totalQuestions } from '@/lib/questions';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface QuestionScreenProps {
   question: Question;
@@ -30,6 +31,7 @@ export function QuestionScreen({
   canGoBack,
 }: QuestionScreenProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     setIsVisible(false);
@@ -57,7 +59,7 @@ export function QuestionScreen({
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-[10%] py-6">
+    <div className="min-h-screen flex items-center justify-center px-4 md:px-[10%] py-6">
       <div
         className={`calm-card w-full transition-all duration-500 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
@@ -97,7 +99,7 @@ export function QuestionScreen({
           </p>
 
           {/* Options */}
-          {question.multiSelect ? (
+          {question.multiSelect || isMobile ? (
             <div className="space-y-3">
               {question.options.map((option, index) => (
                 <AnswerOption
