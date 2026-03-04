@@ -21,7 +21,7 @@ export const snapshots: Record<SnapshotType, Snapshot> = {
     type: 'informal',
     title: 'Informal but Holding',
     subtitle: 'For small teams who are coping now, but relying on goodwill.',
-    openingReflection: "Your business is currently relying heavily on informal ways of working. In small teams where people genuinely care about each other, this often feels completely fine — and in many ways, it is.",
+    openingReflection: "Based on what you've shared, your business is currently relying heavily on informal ways of working. In small teams where people genuinely care about each other, this often feels completely fine — and in many ways, it is.",
     workingWell: [
       'People are committed and want to do the right thing',
       'Issues get handled through conversation rather than process',
@@ -47,7 +47,7 @@ export const snapshots: Record<SnapshotType, Snapshot> = {
     type: 'stretched',
     title: 'Stretched and Exposed',
     subtitle: 'For teams already feeling pressure or cracks forming.',
-    openingReflection: "Your business appears to be running under sustained pressure, with a lot depending on individuals coping and pushing through. This is one of the most common patterns we see — and it's almost always invisible from the inside until someone reaches their limit.",
+    openingReflection: "Based on what you've shared, your business appears to be running under sustained pressure, with a lot depending on individuals coping and pushing through. This is one of the most common patterns we see — and it's almost always invisible from the inside until someone reaches their limit.",
     workingWell: [
       'People are committed and doing their best',
       'Work keeps moving even when things feel stretched',
@@ -73,7 +73,7 @@ export const snapshots: Record<SnapshotType, Snapshot> = {
     type: 'growth-ready',
     title: 'Growth-Ready but Under-Prepared',
     subtitle: 'For businesses with ambition, investment or external scrutiny ahead.',
-    openingReflection: "Your business is functioning well, but much of what's in place is informal and person-dependent. That's completely normal at this stage of growth. The question is whether it will hold as expectations increase.",
+    openingReflection: "Based on what you've shared, your business is functioning well, but much of what's in place is informal and person-dependent. That's completely normal at this stage of growth. The question is whether it will hold as expectations increase.",
     workingWell: [
       'People step up when it matters',
       'Work gets done without heavy process or overhead',
