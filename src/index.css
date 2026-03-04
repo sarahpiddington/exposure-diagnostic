@@ -197,7 +197,11 @@
   }
 }
 
+/* Hidden on screen, visible when printing */
+.print-only { display: none; }
+
 @media print {
+  .print-only { display: block !important; }
   .no-print { display: none !important; }
 
   body {

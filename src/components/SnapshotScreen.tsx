@@ -29,6 +29,12 @@ export function SnapshotScreen({ snapshot, onEmailCopy, onDownloadPdf }: Snapsho
   return (
     <div className="min-h-screen py-12 px-4 md:px-[10%]">
       <div className="w-full">
+        {/* Print-only header */}
+        <div className="print-only mb-8 pb-4 border-b border-gray-300">
+          <p className="font-heading text-base font-bold text-foreground">The Exposure Diagnostic</p>
+          <p className="font-body text-sm text-muted-foreground">Wellbeing, Health and Safety Exposure Diagnostic</p>
+        </div>
+
         {/* Header */}
         <header className="text-center mb-12 animate-fade-in">
           <h1 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -106,6 +112,18 @@ export function SnapshotScreen({ snapshot, onEmailCopy, onDownloadPdf }: Snapsho
             className="h-10 mx-auto mt-8 opacity-70"
           />
         </footer>
+        {/* Print-only booking footer */}
+        <div className="print-only mt-10 pt-4 border-t border-gray-300">
+          <p className="font-body text-sm text-foreground mb-1">
+            <strong>Want to talk through what this means for your business?</strong>
+          </p>
+          <p className="font-body text-sm text-muted-foreground">
+            Book a free, no-pressure call with Sarah: https://calendar.safeandwelltogether.com/discovery
+          </p>
+          <p className="font-body text-sm text-muted-foreground mt-1">
+            Or email: sarah@safeandwelltogether.com
+          </p>
+        </div>
       </div>
     </div>
   );
