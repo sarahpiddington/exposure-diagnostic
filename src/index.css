@@ -165,13 +165,10 @@
 
   /* Labels row */
   .calm-slider-labels {
-    @apply relative mt-3 w-full;
-    height: 2.5rem;
+    @apply flex justify-between w-full mt-3;
   }
   .calm-slider-label {
-    @apply font-caption text-xs text-center leading-tight absolute;
-    transform: translateX(-50%);
-    top: 0;
+    @apply font-caption text-xs leading-tight flex-1;
     color: hsl(var(--muted-foreground));
     transition: color 0.2s, font-weight 0.2s;
   }

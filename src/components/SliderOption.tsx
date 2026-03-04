@@ -51,22 +51,13 @@ export function SliderOption({ options, selectedIndex, onSelect }: SliderOptionP
         {options.map((opt, i) => {
           const isFirst = i === 0;
           const isLast = i === n - 1;
-          const p = n === 1 ? 50 : (i / (n - 1)) * 100;
-          const thumbRadius = 11;
-          const offset = thumbRadius - (2 * thumbRadius * p) / 100;
-
-          // Pin first/last labels to edges so they never overflow the container
-          const style: React.CSSProperties = isFirst
-            ? { left: 0, transform: 'none', textAlign: 'left', maxWidth: `calc(100% / ${n})` }
-            : isLast
-            ? { right: 0, left: 'auto', transform: 'none', textAlign: 'right', maxWidth: `calc(100% / ${n})` }
-            : { left: `calc(${p}% + ${offset.toFixed(2)}px)`, maxWidth: `calc(100% / ${n})` };
+          const textAlign: React.CSSProperties['textAlign'] = isFirst ? 'left' : isLast ? 'right' : 'center';
 
           return (
             <span
               key={i}
               className={cn('calm-slider-label', current === i && 'active')}
-              style={style}
+              style={{ textAlign }}
             >
               {opt.text}
             </span>
