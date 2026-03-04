@@ -68,8 +68,8 @@ export function SnapshotScreen({ snapshot, onEmailCopy, onDownloadPdf }: Snapsho
         </article>
 
         {/* Actions */}
-        <div 
-          className="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-slide-up" 
+        <div
+          className="no-print flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-slide-up"
           style={{ animationDelay: '0.3s' }}
         >
           <Button 
@@ -96,7 +96,7 @@ export function SnapshotScreen({ snapshot, onEmailCopy, onDownloadPdf }: Snapsho
         >
           <a
             href="mailto:sarah@safeandwelltogether.com?subject=I'd like to talk through my results"
-            className="font-caption text-sm text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4"
+            className="no-print font-caption text-sm text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4"
           >
             Talk this through with Sarah
           </a>

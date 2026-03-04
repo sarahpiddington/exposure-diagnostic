@@ -125,7 +125,7 @@ const Index = () => {
   };
 
   const handleDownloadPdf = () => {
-    toast.success('Your PDF is being prepared for download.');
+    window.print();
   };
 
   const currentQuestion = questions[currentQuestionIndex];
