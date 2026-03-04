@@ -233,10 +233,25 @@
     break-inside: avoid;
   }
 
+  /* Keep each snapshot section together */
+  section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
   /* Don't orphan a section heading at the bottom of a page */
   section h3 {
     page-break-after: avoid;
     break-after: avoid;
+  }
+
+  /* Tighter spacing in print to reduce page-break gaps */
+  .space-y-10 > * + * {
+    margin-top: 1.25rem !important;
+  }
+
+  .calm-card {
+    padding: 1rem !important;
   }
 
   a { color: inherit; text-decoration: none; }
