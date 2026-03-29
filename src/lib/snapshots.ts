@@ -35,17 +35,17 @@ export const snapshots: Record<SnapshotType, Snapshot> = {
     mattersAsYouGrow: [
       'If you hire, grow or lose someone key, the gaps in clarity tend to show up first',
       'Simple structure now is almost always easier than fixing things under pressure later',
-      "Knowing where you're exposed gives you choices — and right now, you have them",
+      "Knowing where you're vulnerable gives you choices — and right now, you have them",
     ],
     mattersTitle: 'What will matter as you grow or change',
-    emailSubject: 'Your exposure snapshot — how your business looks right now',
+    emailSubject: 'Your vulnerability snapshot — how your business looks right now',
     emailIntro: "Here's your snapshot from the diagnostic. Take a moment with it — it's worth reading slowly.",
     workingWellNote: "These are genuine strengths. They're often what help small businesses move quickly and feel human.",
     quietlyRiskyNote: "None of this means something is wrong. But it does mean you're relying on things staying as they are.",
   },
   stretched: {
     type: 'stretched',
-    title: 'Stretched and Exposed',
+    title: 'Stretched and Vulnerable',
     subtitle: 'For teams already feeling pressure or cracks forming.',
     openingReflection: "Based on what you've shared, your business appears to be running under sustained pressure, with a lot depending on individuals coping and pushing through. This is one of the most common patterns we see — and it's almost always invisible from the inside until someone reaches their limit.",
     workingWell: [
@@ -64,7 +64,7 @@ export const snapshots: Record<SnapshotType, Snapshot> = {
       'Small, practical steps tend to make the biggest difference at this stage',
     ],
     mattersTitle: 'What will matter as you grow or change',
-    emailSubject: 'Your exposure snapshot — what your answers are telling us',
+    emailSubject: 'Your vulnerability snapshot — what your answers are telling us',
     emailIntro: "Here's your snapshot. It's honest, but I want you to read it knowing it describes something very common — and very fixable.",
     workingWellNote: "That resilience is real, and it matters. But it's expensive to maintain, and it doesn't hold indefinitely.",
     quietlyRiskyNote: "These risks don't tend to announce themselves. They build slowly, then surface all at once.",
@@ -90,7 +90,7 @@ export const snapshots: Record<SnapshotType, Snapshot> = {
       'Getting ahead of this is far easier than retrofitting it during a growth phase or due diligence process',
     ],
     mattersTitle: 'What will matter as you grow or come under scrutiny',
-    emailSubject: "Your exposure snapshot — where you are, and what's coming",
+    emailSubject: "Your vulnerability snapshot — where you are, and what's coming",
     emailIntro: "Here's your snapshot. It reflects where most ambitious businesses are at this stage — and it's worth paying attention to.",
     workingWellNote: "This is what makes businesses like yours agile and fast-moving. The challenge is that it doesn't scale on its own.",
     quietlyRiskyNote: "These aren't failings. They're signals that the business has outgrown its current setup.",
@@ -98,86 +98,61 @@ export const snapshots: Record<SnapshotType, Snapshot> = {
 };
 
 export function determineSnapshot(answers: Record<number, number | number[]>): SnapshotType {
-  // Helper to get single answer value (for non-multiselect questions)
   const getAnswer = (qId: number): number => {
     const ans = answers[qId];
     return typeof ans === 'number' ? ans : -1;
   };
 
-  // STRETCHED signals - pressure and fragility now
+  // STRETCHED signals — pressure and fragility happening now
   let stretchedSignals = 0;
+  if (getAnswer(2) >= 2) stretchedSignals++;           // Key person absence hits core ops or revenue
+  if (getAnswer(3) >= 3) stretchedSignals++;           // Assume fine or don't know
+  if (getAnswer(5) === 1 || getAnswer(5) === 3) stretchedSignals++;  // Push through or surface late
+  if (getAnswer(6) >= 2) stretchedSignals++;           // Ownership unclear or assumed
+  if (getAnswer(8) >= 2) stretchedSignals++;           // Not confident handling issues
 
-  // Q2: Key person absence affects core operations (2) or client delivery/revenue (3)
-  if (getAnswer(2) === 2 || getAnswer(2) === 3) stretchedSignals++;
+  // INFORMAL signals — coping but no real structure
+  let informalSignals = 0;
+  if (getAnswer(3) === 2) informalSignals++;           // People tell us if there's a problem
+  if (getAnswer(4) === 1 || getAnswer(4) === 2) informalSignals++;  // It's been a while / no real conversations
+  if (getAnswer(6) === 2) informalSignals++;           // Ownership assumed
+  if (getAnswer(9) === 1 || getAnswer(9) === 2) informalSignals++;  // Informal handover or figure it out
+  if (getAnswer(10) === 1 || getAnswer(10) === 2) informalSignals++; // Occasionally or only when something goes wrong
+  if (getAnswer(15) === 2) informalSignals++;          // What we have is mostly informal
 
-  // Q3: Assume things are fine (3) or don't know (4)
-  if (getAnswer(3) >= 3) stretchedSignals++;
-
-  // Q5: Push through (1) or issues surface late (3)
-  if (getAnswer(5) === 1 || getAnswer(5) === 3) stretchedSignals++;
-
-  // Q6: Unclear who's responsible (3) or no one owns it (4)
-  if (getAnswer(6) >= 3) stretchedSignals++;
-
-  // Q8: Not very confident (2), need external help (3), or wouldn't know where to start (4)
-  if (getAnswer(8) >= 2) stretchedSignals++;
-
-  // GROWTH signals - growth or scrutiny + readiness gap
+  // GROWTH signals — ambition or scrutiny ahead, foundations missing
   let growthSignals = 0;
-
-  // Q11: Already underway (0), Yes definitely (1), or Possibly (2)
-  if (getAnswer(11) >= 0 && getAnswer(11) <= 2) growthSignals++;
-
-  // Q12: External scrutiny present (any option except "No, not yet" which is index 5)
+  if (getAnswer(11) === 0 || getAnswer(11) === 1) growthSignals++;  // Already underway or yes definitely
   const q12 = answers[12];
-  if (Array.isArray(q12) && q12.length > 0 && !q12.includes(5)) growthSignals++;
+  if (Array.isArray(q12) && q12.length > 0 && !q12.includes(5)) growthSignals++; // External scrutiny already present
+  if (getAnswer(13) === 0 || getAnswer(13) === 1) growthSignals++;  // Has plans or some foundations for growth
+  if (getAnswer(14) === 1 || getAnswer(14) === 2) growthSignals++;  // Could explain roughly or feels vulnerable
+  if (getAnswer(15) === 1) growthSignals++;            // Works now but not for growth
 
-  // Q13: Aware but not formalised (2) or not addressed (3)
-  if (getAnswer(13) === 2 || getAnswer(13) === 3) growthSignals++;
+  // FORMAL signals — evidence of real structure (prevents misclassification)
+  let formalSignals = 0;
+  if (getAnswer(3) === 0) formalSignals++;             // Regular check-ins
+  if (getAnswer(4) === 0) formalSignals++;             // Recent wellbeing conversations
+  if (getAnswer(6) === 0 || getAnswer(6) === 1) formalSignals++;    // Clear ownership
+  if (getAnswer(8) === 0 || getAnswer(8) === 1) formalSignals++;    // Confident handling issues
+  if (getAnswer(9) === 0) formalSignals++;             // Structured onboarding
+  if (getAnswer(10) === 0) formalSignals++;            // Reviews regularly
 
-  // Q14: Feel exposed (2), uncomfortable (3), or avoid question (4)
-  if (getAnswer(14) >= 2) growthSignals++;
+  // DECISION LOGIC
+  // Stretched wins if enough pressure signals and not highly formal
+  if (stretchedSignals >= 3 && formalSignals <= 2) return 'stretched';
+  if (stretchedSignals >= 4) return 'stretched';
 
-  // Q15: Works for now but not growth (1) or mostly informal (2)
-  if (getAnswer(15) === 1 || getAnswer(15) === 2) growthSignals++;
+  // Growth-ready if clear growth intent + awareness gap, and not stretched
+  if (growthSignals >= 3 && stretchedSignals <= 2) return 'growth-ready';
+  if (growthSignals >= 2 && formalSignals >= 3) return 'growth-ready'; // Structured but planning growth
 
-  // VISIBILITY signals - low visibility, uncertainty, lack of check-ins
-  let visibilitySignals = 0;
+  // Informal if genuinely informal (and not formal enough to be growth-ready)
+  if (informalSignals >= 3 && formalSignals <= 2) return 'informal';
 
-  // Q3: People tell us (2), assume fine (3), or don't know (4)
-  if (getAnswer(3) >= 2) visibilitySignals++;
+  // If mostly formal signals with some growth intent → growth-ready
+  if (formalSignals >= 4 && growthSignals >= 1) return 'growth-ready';
 
-  // Q4: It's been a while (2) or we don't have those conversations (3)
-  if (getAnswer(4) === 2 || getAnswer(4) === 3) visibilitySignals++;
-
-  // Q10: Only when something goes wrong (2), Rarely (3), or Never (4)
-  if (getAnswer(10) >= 2) visibilitySignals++;
-
-  // Count "I'm not sure" answers (capped at 3)
-  let unsureCount = 0;
-  const unsureIndexes: Record<number, number> = { 2: 4, 4: 4, 5: 4, 7: 4, 13: 5, 15: 4 };
-  Object.entries(unsureIndexes).forEach(([qId, unsureIdx]) => {
-    if (getAnswer(Number(qId)) === unsureIdx) unsureCount++;
-  });
-  visibilitySignals += Math.min(unsureCount, 3);
-
-  // DECISION LOGIC (priority rules)
-
-  // Rule 1: If StretchedSignals >= 4, return Stretched
-  if (stretchedSignals >= 4) {
-    return 'stretched';
-  }
-
-  // Rule 2: If StretchedSignals >= 3 AND VisibilitySignals >= 2, return Stretched
-  if (stretchedSignals >= 3 && visibilitySignals >= 2) {
-    return 'stretched';
-  }
-
-  // Rule 3: If GrowthSignals >= 3, return Growth-Ready
-  if (growthSignals >= 3) {
-    return 'growth-ready';
-  }
-
-  // Rule 4: Default to Informal
+  // Default
   return 'informal';
 }

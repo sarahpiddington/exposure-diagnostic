@@ -33,15 +33,15 @@ export function SnapshotScreen({ snapshot, onEmailCopy, onDownloadPdf }: Snapsho
         <div className="print-only mb-8 pb-4 border-b border-gray-300 flex items-center gap-4">
           <img src="/logo.png" alt="SAWT Logo" style={{ height: '36px', opacity: 0.85 }} />
           <div>
-            <p className="font-heading text-base font-bold text-foreground">The Exposure Diagnostic</p>
-            <p className="font-body text-sm text-muted-foreground">Wellbeing, Health and Safety Exposure Diagnostic</p>
+            <p className="font-heading text-base font-bold text-foreground">The Vulnerability Diagnostic</p>
+            <p className="font-body text-sm text-muted-foreground">Wellbeing, Health and Safety Vulnerability Diagnostic</p>
           </div>
         </div>
 
         {/* Header */}
         <header className="text-center mb-12 animate-fade-in">
           <h1 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Your Exposure Summary
+            Your Vulnerability Summary
           </h1>
           <p className="font-body text-lg text-muted-foreground">
             Based on what you shared, this is the operating pattern we most often see.

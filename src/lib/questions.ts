@@ -16,11 +16,10 @@ export const questions: Question[] = [
     text: 'Who does work for your business right now?',
     multiSelect: true,
     options: [
-      'Employees',
-      'Contractors or freelancers',
-      'Consultants',
-      'Temporary or casual staff',
-      'Just me',
+      'Permanent employees',
+      'Contractors, consultants or freelancers',
+      'Temporary or casual employees',
+      'Me',
     ],
   },
   {
@@ -192,7 +191,7 @@ export const questions: Question[] = [
     options: [
       'Comfortable and confident',
       'I could explain it roughly',
-      "I'd feel a bit exposed",
+      "I'd feel a bit vulnerable",
       "I'd be uncomfortable",
       "I'd avoid the question",
     ],

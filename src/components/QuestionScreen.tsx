@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { AnswerOption } from '@/components/AnswerOption';
-import { SliderOption } from '@/components/SliderOption';
 import { Question, totalQuestions } from '@/lib/questions';
-import { useIsMobile } from '@/hooks/use-mobile';
 
 interface QuestionScreenProps {
   question: Question;
@@ -15,12 +13,6 @@ interface QuestionScreenProps {
   canGoBack: boolean;
 }
 
-const sectionColors: Record<string, string> = {
-  people: 'bg-secondary/20 text-secondary',
-  operational: 'bg-primary/10 text-primary',
-  growth: 'bg-accent/20 text-accent-foreground',
-};
-
 export function QuestionScreen({
   question,
   selectedAnswer,
@@ -31,7 +23,6 @@ export function QuestionScreen({
   canGoBack,
 }: QuestionScreenProps) {
   const [isVisible, setIsVisible] = useState(false);
-  const isMobile = useIsMobile();
 
   useEffect(() => {
     setIsVisible(false);
@@ -70,12 +61,9 @@ export function QuestionScreen({
           <img src="/logo.png" alt="Safe and Well Together" className="h-12 mx-auto" />
 
           {/* Progress */}
-          <div className="flex items-center justify-between">
+          <div>
             <span className="font-caption text-sm text-muted-foreground">
               Question {question.id} of {totalQuestions} · {Math.round((question.id / totalQuestions) * 100)}% complete
-            </span>
-            <span className={`font-caption text-xs px-3 py-1 rounded-full ${sectionColors[question.section]}`}>
-              {question.sectionLabel}
             </span>
           </div>
 
@@ -99,24 +87,16 @@ export function QuestionScreen({
           </p>
 
           {/* Options */}
-          {question.multiSelect || isMobile ? (
-            <div className={question.multiSelect && !isMobile ? 'grid grid-cols-2 gap-3' : 'space-y-3'}>
-              {question.options.map((option, index) => (
-                <AnswerOption
-                  key={index}
-                  text={option}
-                  isSelected={isOptionSelected(index)}
-                  onClick={() => handleOptionClick(index)}
-                />
-              ))}
-            </div>
-          ) : (
-            <SliderOption
-              options={question.options.map((text) => ({ text }))}
-              selectedIndex={selectedAnswer as number | undefined}
-              onSelect={(i) => onAnswer(question.id, i)}
-            />
-          )}
+          <div className="space-y-3">
+            {question.options.map((option, index) => (
+              <AnswerOption
+                key={index}
+                text={option}
+                isSelected={isOptionSelected(index)}
+                onClick={() => handleOptionClick(index)}
+              />
+            ))}
+          </div>
 
           {/* Navigation */}
           <div className="flex items-center justify-between pt-4">

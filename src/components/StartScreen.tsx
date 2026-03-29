@@ -19,11 +19,11 @@ export function StartScreen({ onStart }: StartScreenProps) {
             className="h-12 mx-auto mb-4"
           />
           <h1 className="font-heading text-3xl md:text-4xl font-bold text-foreground leading-tight text-balance">
-            How Exposed Is Your Business?
+            How Vulnerable Is Your Business, Really?
           </h1>
           
           <p className="font-body text-lg text-muted-foreground leading-relaxed">
-            A short, judgement-free reflection on how exposed your business might be across wellbeing, health and safety.
+            A short, judgement-free reflection on how vulnerable your business might be across wellbeing, health and safety.
           </p>
 
           <p className="font-body text-muted-foreground">

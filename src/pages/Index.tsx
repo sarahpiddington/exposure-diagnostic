@@ -127,8 +127,45 @@ const Index = () => {
   }, []);
 
   const handleDownloadPdf = useCallback(() => {
-    window.print();
-  }, []);
+    const snapshotContent = snapshots[snapshotType];
+    const numbered = (items: string[]) => items.map((s, i) => `${i + 1}. ${s}`).join('<br>');
+    const printWindow = window.open('', '_blank');
+    if (!printWindow) return;
+    printWindow.document.write(`<!DOCTYPE html>
+<html><head><title>Your Vulnerability Summary</title>
+<style>
+  body { font-family: 'Segoe UI', system-ui, sans-serif; max-width: 720px; margin: 0 auto; padding: 40px 24px; color: #1a3a3a; line-height: 1.6; }
+  h1 { font-size: 24px; margin-bottom: 4px; }
+  h2 { font-size: 18px; color: #1a3a3a; margin-top: 28px; margin-bottom: 12px; border-left: 3px solid #b8a04a; padding-left: 12px; }
+  .badge { display: inline-block; background: #e8f0f0; padding: 6px 16px; border-radius: 20px; font-size: 14px; margin-bottom: 16px; }
+  .subtitle { font-size: 18px; font-weight: bold; margin-bottom: 20px; }
+  .opening { margin-bottom: 24px; }
+  .items { margin-left: 0; padding-left: 0; }
+  .items p { margin: 8px 0; padding-left: 16px; border-left: 2px solid #ddd; }
+  .note { font-size: 13px; color: #666; font-style: italic; margin-top: 8px; }
+  .footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #ddd; font-size: 13px; color: #666; }
+  @media print { body { padding: 20px; } }
+</style></head><body>
+<h1>Your Vulnerability Summary</h1>
+<div class="badge">${snapshotContent.title}</div>
+<div class="subtitle">${snapshotContent.subtitle}</div>
+<div class="opening">${snapshotContent.openingReflection}</div>
+<h2>What's likely working well</h2>
+<div class="items">${snapshotContent.workingWell.map(s => `<p>${s}</p>`).join('')}</div>
+<h2>What's quietly risky</h2>
+<div class="items">${snapshotContent.quietlyRisky.map(s => `<p>${s}</p>`).join('')}</div>
+<h2>${snapshotContent.mattersTitle}</h2>
+<div class="items">${snapshotContent.mattersAsYouGrow.map(s => `<p>${s}</p>`).join('')}</div>
+<div class="footer">
+  <p><strong>Want to talk through what this means for your business?</strong></p>
+  <p>Book a free, no-pressure call with Sarah: https://calendar.safeandwelltogether.com/discovery</p>
+  <p>Or email: sarah@safeandwelltogether.com</p>
+</div>
+</body></html>`);
+    printWindow.document.close();
+    printWindow.focus();
+    setTimeout(() => printWindow.print(), 300);
+  }, [snapshotType]);
 
   const currentQuestion = questions[currentQuestionIndex];
   const snapshot = snapshots[snapshotType];
