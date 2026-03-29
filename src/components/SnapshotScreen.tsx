@@ -50,8 +50,8 @@ export function SnapshotScreen({ snapshot, onEmailCopy, onDownloadPdf }: Snapsho
         {/* Main Snapshot Card */}
         <article className="calm-card mb-8 animate-slide-up" style={{ animationDelay: '0.1s' }}>
           {/* Snapshot Type Badge */}
-          <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-6">
-            <span className="font-caption text-sm font-medium text-primary">
+          <div className="mb-6">
+            <span className="font-heading text-2xl md:text-3xl font-bold text-primary">
               {snapshot.title}
             </span>
           </div>
