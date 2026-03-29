@@ -76,7 +76,7 @@ export function QuestionScreen({
           </div>
 
           {/* Question */}
-          <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground leading-snug text-balance">
+          <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground leading-snug">
             {question.text}
           </h2>
 

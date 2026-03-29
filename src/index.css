@@ -110,12 +110,8 @@
   }
 
   .answer-option.selected {
-    @apply border-primary;
-  }
-
-  .answer-option.selected::before {
-    content: '';
-    @apply absolute left-0 top-4 bottom-4 w-1 rounded-full bg-accent;
+    @apply border-accent;
+    box-shadow: 0 0 0 1px hsl(var(--accent));
   }
 
   /* Slider (single-select questions) */
