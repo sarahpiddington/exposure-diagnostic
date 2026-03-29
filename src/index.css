@@ -245,6 +245,18 @@
     margin-top: 1.25rem !important;
   }
 
+  /* Stronger section headings in print */
+  h3 {
+    font-size: 14pt !important;
+    font-weight: bold !important;
+  }
+
+  /* Snapshot type badge visible in print */
+  .inline-block.rounded-full {
+    border: 1px solid #333 !important;
+    background: transparent !important;
+  }
+
   a { color: inherit; text-decoration: none; }
 }
 

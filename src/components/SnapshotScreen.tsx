@@ -1,11 +1,10 @@
 import { Button } from '@/components/ui/button';
 import { Snapshot } from '@/lib/snapshots';
 
-function SnapshotSection({ title, items, accentClass }: { title: string; items: string[]; accentClass: string }) {
+function SnapshotSection({ title, items }: { title: string; items: string[] }) {
   return (
     <section>
-      <h3 className="font-heading text-lg font-bold text-foreground mb-4 flex items-center gap-3">
-        <span className={`w-8 h-0.5 rounded-full ${accentClass}`}></span>
+      <h3 className="font-heading text-xl font-bold text-primary mb-4">
         {title}
       </h3>
       <ul className="space-y-3">
@@ -70,9 +69,9 @@ export function SnapshotScreen({ snapshot, onEmailCopy, onDownloadPdf }: Snapsho
 
           {/* Sections */}
           <div className="space-y-10">
-            <SnapshotSection title="What's likely working well" items={snapshot.workingWell} accentClass="bg-secondary" />
-            <SnapshotSection title="What's quietly risky" items={snapshot.quietlyRisky} accentClass="bg-muted" />
-            <SnapshotSection title={snapshot.mattersTitle} items={snapshot.mattersAsYouGrow} accentClass="bg-primary/50" />
+            <SnapshotSection title="What's likely working well" items={snapshot.workingWell} />
+            <SnapshotSection title="What's quietly risky" items={snapshot.quietlyRisky} />
+            <SnapshotSection title={snapshot.mattersTitle} items={snapshot.mattersAsYouGrow} />
           </div>
         </article>
 
