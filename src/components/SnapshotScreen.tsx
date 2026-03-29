@@ -33,8 +33,8 @@ export function SnapshotScreen({ snapshot, onEmailCopy, onDownloadPdf }: Snapsho
         <div className="print-only mb-8 pb-4 border-b border-gray-300 flex items-center gap-4">
           <img src="/logo.png" alt="SAWT Logo" style={{ height: '36px', opacity: 0.85 }} />
           <div>
-            <p className="font-heading text-base font-bold text-foreground">The Vulnerability Diagnostic</p>
-            <p className="font-body text-sm text-muted-foreground">Wellbeing, Health and Safety Vulnerability Diagnostic</p>
+            <p className="font-heading text-base font-bold text-foreground">The Vulnerability Check</p>
+            <p className="font-body text-sm text-muted-foreground">Wellbeing, Health and Safety Vulnerability Check</p>
           </div>
         </div>
 

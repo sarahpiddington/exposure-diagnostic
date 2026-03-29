@@ -1,13 +1,13 @@
-# The Exposure Diagnostic
+# The Vulnerability Check
 
-A questionnaire-based diagnostic tool for UK small/medium businesses to assess their wellbeing and health & safety exposure. Built by Safe and Well Together (SAWT).
+A questionnaire-based tool for UK small/medium businesses to assess their wellbeing and health & safety vulnerability. Built by Safe and Well Together (SAWT).
 
 ## What it does
 
 Users complete 15 questions across 3 sections (People Strain, Operational Clarity, Growth Readiness) and receive one of three personalised narrative results:
 
 - **Informal but Holding** — coping now, relying on goodwill
-- **Stretched and Exposed** — pressure already showing
+- **Stretched and Vulnerable** — pressure already showing
 - **Growth-Ready but Under-Prepared** — ambition ahead, foundations missing
 
 After completing the questionnaire, contact details are captured and sent to GHL (Go High Level) via webhook. Sarah receives an email notification and the contact + answers are stored in GHL.
